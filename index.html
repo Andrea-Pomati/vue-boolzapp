@@ -1,60 +1,129 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Boolzapp</title>
-    <!-- fontawesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <!-- bootstrap -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
-    <!-- CSS -->
-    <link rel="stylesheet" href="css/style.css">
-
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Boolzapp</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <!-- div Vue js -->
-    <div id="app">
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+  
+  <div id="app">
+
+    <div id="chat-container">
+
+      <div id="users-list">
+
+        <div class="top-bar-left">
+            
+          <div class="personal-profile">
+
+              <div id="profile-container"><img src="img/avatar_4.jpg" id="profile-img" alt="">
+                <span>Andrea</span> 
+              </div>
+          
+
+              <div class="three-icons-container">
+
+                <i class="fa-solid fa-spinner icone-sinistra"></i>
+                <i class="fa-solid fa-message icone-sinistra "></i>
+                <i class="fa-solid fa-bars icone-sinistra"></i>
+
+              </div>
+
+          </div>
+
+        
 
 
 
+        </div>
+        <div class="notification-alert"></div>
+        <div id="search-bar"></div>
+
+        <ul id="users-chat-list">
+
+          <li v-for="(contact, index) in contacts" class="user-chat-element" :class=" index == activeContactIndex ? 'active' : ''" @click="changeActiveContactIndex(index)" >
+
+            <div class="user-pic">
+              <img v-bind:src="contact.avatar" alt="user pic">
+            </div>
+            <div class="user-chat-details">
+              <div class="user-name">{{ contact.name }}</div>
+              <div class="user-last-message scritte-grigie">Ultimo messaggio inviato</div>
+             
+            </div>
+            <div class="scritte-grigie">12.00</div>
+          </li>
+          
+        </ul>
+
+      </div>
 
 
+      <!-- _____________________________________________ -->
+
+      <div id="single-chat">
+        <div class="top-bar-right">
+
+          <div class="user-pic">
+            <img :src="contacts[activeContactIndex].avatar" alt="user pic">
+              <div class="user-chat-details">
+
+                <div class="user-name">{{ contacts[activeContactIndex].name }}</div>
+              
+                <div class="user-last-access scritte-grigie">Ultimo accesso oggi alle 12.00</div>
+            
+              </div>
 
 
+          </div>
+          
+          <div class="three-icons-container">
+            <i class="fa-solid fa-magnifying-glass icone-sinistra"></i>
+            <i class="fa-solid fa-paperclip icone-sinistra "></i>
+            <i class="fa-solid fa-bars icone-sinistra"></i>
+          </div>
+         
+        </div>
+
+        <div id="messages-list">
+          <!-- elemento -> un array -> oggetto -> array  -->
+          <!-- un singolo elemento dell'array messages dell'oggetto singolo di contacts -->
+
+          <div v-for="singleMessage in contacts[activeContactIndex].messages" class="message" :class="singleMessage.status">
+
+            {{singleMessage.message}}
+            <div class="message-time">
+              {{ singleMessage.date }}
+            </div>
+
+          </div>
 
 
+        </div>
+
+        <div id="bottom-bar">
+          <i class="fa-regular fa-face-smile scritte-grigie"></i>
+          <input type="text" name="" id="input-border" placeholder="scrivi un messaggio">
+          <i class="fa-solid fa-microphone scritte-grigie"></i>
 
 
+        </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!-- script bootstrap -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-
-<!-- script javascript -->
-<script src="js/script.js"</script>
+      </div>
 
     </div>
+
+    
+    <div id="sfondo-verde"></div>
+
+  </div>
+
+  <script src="js/script.js"></script>
 </body>
 </html>
