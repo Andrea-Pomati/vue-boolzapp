@@ -42,12 +42,21 @@
 
 
         </div>
-        <div class="notification-alert"></div>
+        <div class="notification-alert">
+        
+
+
+        </div>
         <div id="search-bar"></div>
+
+        <div id="contacts-search">
+          <input v-model="userSearch" @keyup="contactsSearch()" type="text" placeholder="Cerca o inizia una nuova chat" id="ricerca-utenti">
+        </div>
+
 
         <ul id="users-chat-list">
 
-          <li v-for="(contact, index) in contacts" class="user-chat-element" :class=" index == activeContactIndex ? 'active' : ''" @click="changeActiveContactIndex(index)" >
+          <li v-for="(contact, index) in contacts" v-show="contact.visible" class="user-chat-element" :class=" index == activeContactIndex ? 'active' : ''" @click="changeActiveContactIndex(index)" >
 
             <div class="user-pic">
               <img v-bind:src="contact.avatar" alt="user pic">
@@ -92,9 +101,8 @@
         </div>
 
         <div id="messages-list">
-          <!-- elemento -> un array -> oggetto -> array  -->
-          <!-- un singolo elemento dell'array messages dell'oggetto singolo di contacts -->
-
+         
+         
           <div v-for="singleMessage in contacts[activeContactIndex].messages" class="message" :class="singleMessage.status">
 
             {{singleMessage.message}}
@@ -109,7 +117,7 @@
 
         <div id="bottom-bar">
           <i class="fa-regular fa-face-smile scritte-grigie"></i>
-          <input type="text" name="" id="input-border" placeholder="scrivi un messaggio">
+          <input v-model="userMessageInput" @keyup.enter="sendMessage()" type="text" name="" id="input-border" placeholder="scrivi un messaggio">
           <i class="fa-solid fa-microphone scritte-grigie"></i>
 
 

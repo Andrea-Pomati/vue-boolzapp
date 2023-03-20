@@ -175,6 +175,7 @@
   
     padding: 20px;
     height: calc(100% - 160px);
+    overflow-y: auto;
   
   }
   
@@ -231,3 +232,14 @@
   }
 
   /* fine bottom-bar */
+
+#ricerca-utenti{
+  width: 100%;
+
+
+}
+
+
+
+
+

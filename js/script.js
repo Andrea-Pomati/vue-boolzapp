@@ -1,15 +1,9 @@
 const { createApp } = Vue;
 
 createApp({
-  // creo una lista di todo
-  // che posso vedere e eliminare quelli che ho già fatto
 
   data() {
     return {
-      // contacts è un array di oggetti
-      // ogni oggetto contiene i dettagli dell'utente con cui chattiamo
-      // contiene anche un array di messaggi
-      // ogni messaggio contiene la data, il testo e lo stato (inviato o ricevuto)
       
       contacts: [
         {
@@ -175,21 +169,63 @@ createApp({
             ],
         }
       ],
-      // questa proprietà mi dice quale sia la chat da visualizzare a destra, cambia in base
-      // al contatto cliccato a sinistra
       activeContactIndex: 0,
+
+      userMessageInput: '',
+      userSearch: '',
     }
   },
 
   methods: {
     
     changeActiveContactIndex(contactIndex) {
-      // cambiare la proprietà activeContactIndex
-      // in base a quale contatto abbiamo cliccato
       
       this.activeContactIndex = contactIndex;
 
       console.log(this.activeContactIndex);
+    },
+
+    sendMessage() {
+        
+        
+        const newMessage = {
+            date: '10/01/2020 15:51:00',
+            message: this.userMessageInput,
+            status: 'sent',
+        };
+        
+
+        this.contacts[this.activeContactIndex].messages.push(newMessage);
+
+        this.userMessageInput = '';
+
+        const contactReply = {
+            date: '10/01/2020 15:51:00',
+            message: 'ok',
+            status: 'received',
+        }
+
+
+        setTimeout(() => {
+            this.contacts[this.activeContactIndex].messages.push(contactReply);
+        }, 1000);
+    },
+
+    contactsSearch() {
+
+
+
+
+        this.contacts.forEach(contact => {
+
+
+            if(contact.name.toLowerCase().includes(this.userSearch.toLowerCase())) {
+                contact.visible = true;
+            } else {
+                contact.visible = false;
+            }
+
+        });
     },
 
   },
